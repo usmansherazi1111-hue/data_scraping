@@ -1,3 +1,73 @@
+## Custom Company Information Scraper
+
+This repository has been customized to provide a simple web-based company information scraper built on top of ScrapeGraphAI.
+
+The application accepts a company website URL, extracts relevant company information, displays the results in a browser, and allows the extracted data to be downloaded as an Excel file.
+
+### Extracted Information
+
+The scraper is designed to collect the following information:
+
+- **Company Name**
+- **Company Description**
+- **Founder / CEO**
+- **Business Email**
+- **CEO / Founder Email** (only when publicly listed)
+- **Phone Number**
+- **Social Media Links**
+  - LinkedIn
+  - Facebook
+  - Instagram
+  - Twitter / X
+  - Other social media links
+
+### Main Features
+
+- Web-based interface using **Flask**
+- Accepts a company website URL as input
+- Uses **ScrapeGraphAI** for LLM-based information extraction
+- Uses **OpenRouter** as the LLM provider
+- Supports the `openai/gpt-oss-20b` model through OpenRouter
+- Uses **Playwright** for browser-based webpage access
+- Normalizes scraper responses whether they are returned as dictionaries or JSON strings
+- Displays extracted company information in a structured table
+- Exports the results to an **Excel (.xlsx)** file
+- Uses `openpyxl` for Excel file generation
+- Uses environment variables for API key configuration
+- Does not generate or guess missing contact information
+
+### Web Interface
+
+The application provides a simple browser interface where the user can:
+
+1. Enter a company website URL.
+2. Start the scraping process.
+3. View the extracted company information.
+4. Download the results as an Excel spreadsheet.
+
+### Output Format
+
+The Excel file contains the following columns:
+
+| Field | Description |
+|---|---|
+| Company Name | Name of the company |
+| Company Description | Short description of the company's business |
+| Founder / CEO | Publicly identified founder or CEO |
+| Business Email | Publicly listed company/business email |
+| CEO / Founder Email | Publicly listed email associated with the founder or CEO |
+| Phone Number | Publicly listed business phone number |
+| LinkedIn | Company's LinkedIn profile |
+| Facebook | Company's Facebook page |
+| Instagram | Company's Instagram profile |
+| Twitter | Company's Twitter/X profile |
+| Other Social Links | Other publicly available social media links |
+
+### Configuration
+
+Create a `.env` file in the project directory and add your OpenRouter API key:
+
+
 ## 🚀 **Looking for an even faster and simpler way to scrape at scale (only 5 lines of code)?** Check out our enhanced version at [**ScrapeGraphAI.com**](https://scrapegraphai.com/?utm_source=github&utm_medium=readme&utm_campaign=oss_cta&ut#m_content=top_banner)! 🚀
 
 ---

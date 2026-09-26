@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B2B Leads</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header>
+  <h1>B2B Leads</h1>
+  <nav>
+    <button data-tab="dashboard" class="active">Dashboard</button>
+    <button data-tab="contacts">Contacts</button>
+    <button data-tab="companies">Companies</button>
+    <button data-tab="campaigns">Campaigns</button>
+    <button data-tab="scraping">Scraping</button>
+    <button data-tab="proxies">Proxies</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Dashboard -->
+  <section id="dashboard" class="tab active">
+    <h2>Outreach</h2>
+    <div class="tiles" id="kpi-campaigns"></div>
+    <h2>Pipeline</h2>
+    <div class="tiles" id="kpi-pipeline"></div>
+    <div class="stages" id="kpi-stages"></div>
+    <h2>Scraping</h2>
+    <div class="tiles" id="kpi-scraping"></div>
+    <h2>Campaigns</h2>
+    <table id="kpi-per-campaign"></table>
+  </section>
+
+  <!-- Contacts -->
+  <section id="contacts" class="tab">
+    <div class="toolbar">
+      <input id="contact-q" placeholder="Search name, email, title">
+      <select id="contact-stage"><option value="">All stages</option></select>
+      <button id="contact-search">Search</button>
+      <a class="button" href="/api/contacts.csv" download>Export CSV</a>
+    </div>
+    <details>
+      <summary>Add contact</summary>
+      <form id="contact-form" class="grid">
+        <input name="first_name" placeholder="First name">
+        <input name="last_name" placeholder="Last name">
+        <input name="email" type="email" placeholder="Business email">
+        <input name="title" placeholder="Title">
+        <input name="phone" placeholder="Phone">
+        <input name="company_id" type="number" placeholder="Company ID">
+        <select name="lawful_basis">
+          <option value="legitimate_interest">Legitimate interest</option>
+          <option value="consent">Consent</option>
+          <option value="contract">Contract</option>
+        </select>
+        <button>Save</button>
+      </form>
+    </details>
+    <table id="contacts-table"></table>
+    <div id="contact-detail" class="panel hidden"></div>
+  </section>
+
+  <!-- Companies -->
+  <section id="companies" class="tab">
+    <div class="toolbar">
+      <input id="company-q" placeholder="Search company or domain">
+      <button id="company-search">Search</button>
+    </div>
+    <details>
+      <summary>Add company</summary>
+      <form id="company-form" class="grid">
+        <input name="name" placeholder="Name" required>
+        <input name="website" placeholder="Website">
+        <input name="industry" placeholder="Industry">
+        <input name="location" placeholder="Location">
+        <input name="size" placeholder="Size">
+        <button>Save</button>
+      </form>
+    </details>
+    <table id="companies-table"></table>
+    <div id="company-detail" class="panel hidden"></div>
+  </section>
+
+  <!-- Campaigns -->
+  <section id="campaigns" class="tab">
+    <details open>
+      <summary>New campaign</summary>
+      <form id="campaign-form" class="grid">
+        <input name="name" placeholder="Campaign name" required>
+        <input name="from_name" placeholder="From name">
+        <input name="from_email" type="email" placeholder="From email" required>
+        <input name="daily_send_limit" type="number" value="50" min="1" title="Daily send limit">
+        <input name="subject_template" class="wide" placeholder="Subject, e.g. Quick question for {{company}}">
+        <textarea name="body_template" class="wide" rows="5" placeholder="Hi {{first_name}}, ... (unsubscribe link and postal address are appended automatically)"></textarea>
+        <button>Create</button>
+      </form>
+    </details>
+    <table id="campaigns-table"></table>
+    <div id="campaign-detail" class="panel hidden"></div>
+  </section>
+
+  <!-- Scraping -->
+  <section id="scraping" class="tab">
+    <details open>
+      <summary>New scrape job</summary>
+      <form id="scrape-form" class="grid">
+        <input name="name" placeholder="Job name" value="Scrape job">
+        <select name="extractor">
+          <option value="scrapegraph">ScrapeGraphAI (LLM)</option>
+          <option value="basic">Basic (no LLM)</option>
+        </select>
+        <label class="check"><input type="checkbox" name="import_to_crm" checked> Import into CRM</label>
+        <textarea name="urls" class="wide" rows="5" placeholder="One URL per line" required></textarea>
+        <textarea name="prompt" class="wide" rows="3" placeholder="What to extract (optional)"></textarea>
+        <button>Start</button>
+      </form>
+      <p class="hint">Requests respect robots.txt, are paced per domain and rotate through your proxy pool. Pages that answer with a block or CAPTCHA are recorded as blocked and skipped.</p>
+    </details>
+    <table id="jobs-table"></table>
+    <div id="job-detail" class="panel hidden"></div>
+  </section>
+
+  <!-- Proxies -->
+  <section id="proxies" class="tab">
+    <div class="toolbar">
+      <button id="proxy-check">Run health check</button>
+      <span class="hint">Configure proxies with <code>B2B_LEADS_PROXIES</code> or <code>proxy.urls</code> in the config file.</span>
+    </div>
+    <table id="proxies-table"></table>
+  </section>
+</main>
+
+<div id="toast" class="hidden"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

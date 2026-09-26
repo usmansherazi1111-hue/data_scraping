@@ -68,6 +68,27 @@ The Excel file contains the following columns:
 Create a `.env` file in the project directory and add your OpenRouter API key:
 
 
+Running the Application
+
+Create and activate a virtual environment:
+
+python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+
+Install the project and required dependencies:
+
+pip install -e .
+pip install openai python-dotenv flask openpyxl
+
+Install Playwright browsers:
+
+playwright install
+
+Run the scraper:
+
+python test_scraper.py
+
 ## 🚀 **Looking for an even faster and simpler way to scrape at scale (only 5 lines of code)?** Check out our enhanced version at [**ScrapeGraphAI.com**](https://scrapegraphai.com/?utm_source=github&utm_medium=readme&utm_campaign=oss_cta&ut#m_content=top_banner)! 🚀
 
 ---

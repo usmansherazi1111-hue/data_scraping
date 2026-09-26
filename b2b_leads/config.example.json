@@ -1,0 +1,29 @@
+{
+  "data_dir": "b2b_leads/data",
+  "sender_postal_address": "Your Company Ltd, 1 Example Street, City, Postcode, Country",
+  "unsubscribe_base_url": "https://your-domain.example/unsubscribe",
+  "llm": {
+    "api_key": "env:OPENROUTER_API_KEY",
+    "base_url": "https://openrouter.ai/api/v1",
+    "model": "openai/gpt-oss-20b"
+  },
+  "scrape": {
+    "user_agent": "YourCompanyLeadsBot/1.0 (+https://your-domain.example/bot)",
+    "respect_robots_txt": true,
+    "min_delay_seconds": 2.0,
+    "jitter_seconds": 1.5,
+    "max_retries": 3,
+    "backoff_base_seconds": 2.0,
+    "backoff_max_seconds": 60.0,
+    "timeout_seconds": 30.0,
+    "max_concurrent_domains": 4
+  },
+  "proxy": {
+    "urls": [],
+    "strategy": "round_robin",
+    "health_check_url": "https://httpbin.org/ip",
+    "health_check_interval_seconds": 300,
+    "failure_threshold": 3,
+    "cooldown_seconds": 300
+  }
+}
